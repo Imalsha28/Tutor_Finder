@@ -11,7 +11,8 @@ class FirstScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String selectedLocation = "Set your Location"; // Default dropdown value
+    String selectedLocation = "Set your Location";
+    String selectedLanguage = "Select Language"; // Default dropdown value
 
     return Scaffold(
       appBar: AppBar(
@@ -72,54 +73,93 @@ class FirstScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   // Dropdown for location
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: selectedLocation,
-                        icon: const Icon(Icons.arrow_drop_down,
-                            color: Colors.grey),
-                        items: <String>[
-                          "Set your Location",
-                          "Colombo",
-                          "Galle",
-                          "Kandy",
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(fontSize: 16),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              spreadRadius: 2,
                             ),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          if (newValue == "Set your Location") {
-                            // Navigate to the Search Location Screen
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SearchLocationScreen()),
-                            );
-                          } else {
-                            // Handle other selections (e.g., update selectedLocation)
-                            print("Selected location: $newValue");
-                          }
-                        },
+                          ],
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: selectedLocation,
+                            icon: const Icon(Icons.arrow_drop_down,
+                                color: Colors.grey),
+                            items: <String>[
+                              "Set your Location",
+                              "Colombo",
+                              "Galle",
+                              "Kandy",
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              if (newValue == "Set your Location") {
+                                // Navigate to the Search Location Screen
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchLocationScreen()),
+                                );
+                              } else {
+                                // Handle other selections (e.g., update selectedLocation)
+                                print("Selected location: $newValue");
+                              }
+                            },
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(width: 16),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                              )
+                            ]),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                          value: selectedLanguage,
+                          icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
+                          items: <String>[
+                            "Select Language",
+                            "English",
+                            "Tamil",
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            print("Selected Language: $newValue");
+                          },
+                        )),
+                      )
+                    ],
                   ),
                 ],
               ),
