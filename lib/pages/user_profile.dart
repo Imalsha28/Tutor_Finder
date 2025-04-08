@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_1/pages/authentication/sign_in.dart';
-import 'package:project_1/pages/authentication/sign_up.dart';
-import 'package:project_1/pages/tutor_register.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
@@ -13,7 +10,7 @@ class UserProfile extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Navigate back
+            Navigator.pop(context);
           },
         ),
         title: const Text('Profile'),
@@ -23,102 +20,76 @@ class UserProfile extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(78.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
         child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.spaceBetween, // Space between elements
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-                height: 25), // Top padding to move text down a little
+            // Profile Picture
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: AssetImage('assets/student.jpg'),
+            ),
+            const SizedBox(height: 15),
+            // User Name
             const Text(
-              'Sign in to your account',
+              'Noah Lee',
               style: TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-                height: 20), // Adjusted space between text and buttons
+            const SizedBox(height: 20),
 
-            // Sign Up Button
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to Sign Up screen
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const SignUp()));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // white background
-                foregroundColor: Colors.purple, // purple text
-                side: const BorderSide(
-                    color: Colors.purple, width: 2), // purple border
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-              ),
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            // Space between buttons
+            // Profile Fields
+            _buildProfileField(Icons.person, 'Username'),
+            const SizedBox(height: 10),
+            _buildProfileField(Icons.phone, '+123 456 7890'),
+            const SizedBox(height: 10),
+            _buildProfileField(Icons.email, 'noahlee@example.com'),
 
-            // Sign In Button
-            ElevatedButton(
+            const SizedBox(height: 30),
+            // Logout Button
+            TextButton.icon(
               onPressed: () {
-                // Navigate to Sign In screen
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const SignIn()));
+                // Handle logout
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple, // purple background
-                foregroundColor: Colors.white, // white text
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-              ),
-              child: const Text(
-                'Sign In',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            const SizedBox(
-                height: 30), // Space between Sign In and Register buttons
-
-            // Register as a Tutor Button
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to Register as a Tutor screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TutorRegister()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple, // purple background
-                foregroundColor: Colors.white, // white text
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                side: const BorderSide(
-                    color: Colors.deepPurple, width: 2), // border color
-              ),
-              child: const Text(
-                'Register As a Tutor',
-                style: TextStyle(fontSize: 16),
+              icon: const Icon(Icons.logout, color: Colors.red),
+              label: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.red, fontSize: 16),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // Helper Widget for Profile Fields
+  Widget _buildProfileField(IconData icon, String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.black54),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.edit, color: Colors.grey),
+            onPressed: () {
+              // Handle edit action
+            },
+          ),
+        ],
       ),
     );
   }

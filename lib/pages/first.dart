@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/pages/Location.dart';
-import 'package:project_1/pages/home.dart';
 import 'package:project_1/pages/tutor_profile.dart';
 import 'package:project_1/pages/tutor_register.dart';
 
@@ -18,15 +17,6 @@ class FirstScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-        ),
         title: Text(
           'Hi, $userName! 👋',
           style: const TextStyle(
