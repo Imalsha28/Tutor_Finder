@@ -1,7 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
+
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String name = "Loading...";
+  String email = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DocumentSnapshot userDoc =
+          await _firestore.collection("users").doc(user.uid).get();
+
+      if (userDoc.exists) {
+        setState(() {
+          name = userDoc["Name"] ?? "No Name";
+          email = userDoc["email"] ?? "No Email";
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +63,30 @@ class UserProfile extends StatelessWidget {
               radius: 50,
               backgroundImage: AssetImage('assets/student.jpg'),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
             // User Name
-            const Text(
-              'Noah Lee',
+            Text(
+              name,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // Profile Fields
-            _buildProfileField(Icons.person, 'Username'),
+            _buildProfileField(Icons.person, name),
             const SizedBox(height: 10),
             _buildProfileField(Icons.phone, '+123 456 7890'),
             const SizedBox(height: 10),
-            _buildProfileField(Icons.email, 'noahlee@example.com'),
+            _buildProfileField(Icons.email, email),
 
             const SizedBox(height: 30),
             // Logout Button
             TextButton.icon(
               onPressed: () {
-                // Handle logout
+                _auth.signOut();
+                Navigator.pop(context);
               },
               icon: const Icon(Icons.logout, color: Colors.red),
               label: const Text(
