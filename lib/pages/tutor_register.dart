@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/models/tutor_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class TutorRegister extends StatefulWidget {
   const TutorRegister({super.key});
@@ -14,6 +17,9 @@ class _TutorRegisterState extends State<TutorRegister> {
   final TextEditingController teachingExpController = TextEditingController();
   final TextEditingController educationController = TextEditingController();
   final TextEditingController academicExpController = TextEditingController();
+  final TextEditingController subjectController = TextEditingController();
+  final TextEditingController monthlyFeeController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   String selectedLocation = "Select Location";
   String selectedCity = "Select City";
@@ -48,16 +54,30 @@ class _TutorRegisterState extends State<TutorRegister> {
                 label: "Location",
                 icon: Icons.location_on,
                 value: selectedLocation,
-                items: ["Select Location", "Colombo", "Galle", "Kandy"],
+                items: [
+                  "Select Location",
+                  "Colombo",
+                  "Galle",
+                  "Kandy",
+                  "Trincomalee"
+                ],
                 onChanged: (value) => setState(() => selectedLocation = value!),
               ),
               _buildDropdownField(
                 label: "City",
                 icon: Icons.location_city,
                 value: selectedCity,
-                items: ["Select City", "Colombo", "Galle", "Kandy"],
+                items: [
+                  "Select City",
+                  "Colombo",
+                  "Galle",
+                  "Kandy",
+                  "Trincomalee"
+                ],
                 onChanged: (value) => setState(() => selectedCity = value!),
               ),
+              _buildInputField("Subject", Icons.book_online, subjectController),
+
               _buildInputField("Your Teaching Experience", Icons.school,
                   teachingExpController),
               _buildInputField(
@@ -171,9 +191,47 @@ class _TutorRegisterState extends State<TutorRegister> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Handle 'Create' logic
-                        print("Profile Created!");
+                      onPressed: () async {
+                        TutorModel tutor = TutorModel(
+                            name: nameController.text,
+                            subjects: subjectController.text,
+                            description: descriptionController.text,
+                            tuitionType: tuitionType,
+                            location: selectedLocation,
+                            city: selectedCity,
+                            teachingExp: teachingExpController.text,
+                            education: educationController.text,
+                            tuitionLevel: tuitionLevel,
+                            tuitionMedium: tuitionMedium,
+                            feeType: feeRange,
+                            monthlyFees: monthlyFeeController.text,
+                            academicExp: academicExpController.text);
+
+                        final prefs = await SharedPreferences.getInstance();
+                        final String? existingTutorsString =
+                            prefs.getString('tutors');
+
+// Step 1: Decode existing string to List
+                        List<dynamic> tutorList = existingTutorsString != null
+                            ? jsonDecode(existingTutorsString)
+                            : [];
+
+// Step 2: Add new tutor as JSON
+                        tutorList.add(tutor.toJson());
+
+// Step 3: Encode updated list to string
+                        final updatedTutorsString = jsonEncode(tutorList);
+
+// Step 4: Save back to SharedPreferences
+                        await prefs.setString('tutors', updatedTutorsString);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Registered as tutor successfully!'),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,

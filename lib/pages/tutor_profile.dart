@@ -1,9 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_1/pages/tutor.dart';
+import 'dart:convert';
+import 'package:project_1/models/tutor_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class TutorProfile extends StatelessWidget {
+Future<List<TutorModel>> getTutorList() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? tutorsString = prefs.getString('tutors');
+
+  if (tutorsString == null) return [];
+
+  List<dynamic> tutorJsonList = jsonDecode(tutorsString);
+  return tutorJsonList.map((json) => TutorModel.fromJson(json)).toList();
+}
+
+class TutorProfile extends StatefulWidget {
   const TutorProfile({super.key});
 
+  @override
+  State<TutorProfile> createState() => _TutorProfileState();
+}
+
+class _TutorProfileState extends State<TutorProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,29 +58,46 @@ class TutorProfile extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: 5, // Number of profiles
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Tutor()),
+            child: FutureBuilder<List<TutorModel>>(
+              future: getTutorList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text("Error loading tutors"));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text("No tutors found"));
+                }
+
+                final tutors = snapshot.data!;
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: tutors.length,
+                  itemBuilder: (context, index) {
+                    final tutor = tutors[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Tutor(),
+                          ),
+                        );
+                      },
+                      child: TutorCard(
+                        name: tutor.name,
+                        subjects: tutor.subjects,
+                        location: tutor.location,
+                        tuitionType: tutor.tuitionType,
+                        grade: tutor.tuitionLevel,
+                        monthlyFees: "Rs. ${tutor.monthlyFees} / Month",
+                        description: tutor.description,
+                        onFavoriteTap: () {
+                          print("Favorited ${tutor.name}");
+                        },
+                      ),
                     );
                   },
-                  child: TutorCard(
-                    name: "Tutor $index",
-                    subjects: "Maths, Science",
-                    tuitionType: "Online / In-Person",
-                    grade: "Grade 6-8",
-                    monthlyFees: "Rs. 2000 / Month",
-                    description: "Experienced tutor with 5 years of teaching.",
-                    onFavoriteTap: () {
-                      // Handle favorite button tap
-                      print("Favorited Tutor $index");
-                    },
-                  ),
                 );
               },
             ),
@@ -109,6 +145,7 @@ class TutorCard extends StatelessWidget {
   final String grade;
   final String monthlyFees;
   final String description;
+  final String location;
   final VoidCallback onFavoriteTap;
 
   const TutorCard({
@@ -119,6 +156,7 @@ class TutorCard extends StatelessWidget {
     required this.grade,
     required this.monthlyFees,
     required this.description,
+    required this.location,
     required this.onFavoriteTap,
   });
 
