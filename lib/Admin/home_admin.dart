@@ -38,15 +38,15 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(height: 20),
             Center(
               child: _buildCard(
-                  context, 'Total Users', '1000', Colors.deepPurple, 200, 400),
+                  context, 'Total Users', '17', Colors.deepPurple, 200, 400),
             ),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildCard(context, 'Tutors', '500', Colors.orange, 200, 170),
+                _buildCard(context, 'Tutors', '7', Colors.orange, 200, 170),
                 SizedBox(width: 20),
-                _buildCard(context, 'Students', '500', Colors.blue, 200, 170),
+                _buildCard(context, 'Students', '10', Colors.blue, 200, 170),
               ],
             ),
           ],

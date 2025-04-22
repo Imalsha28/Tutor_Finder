@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/pages/first.dart';
+import 'package:project_1/pages/tutor_profile.dart';
+import 'package:project_1/models/tutor_filter.dart';
+import 'package:project_1/pages/filter_profile.dart';
 
 class FindTutor extends StatefulWidget {
   const FindTutor({super.key});
@@ -17,17 +20,20 @@ class _FindTutorState extends State<FindTutor> {
   String selectedSubject = "Select Subject";
   Set<String> selectedDates = {}; // Tracks selected dates
   double minFee = 0;
-  double maxFee = 1000;
+  double maxFee = 10000;
 
-  final List<String> cities = ["Select City", "New York", "London", "Colombo"];
+  final List<String> cities = [
+    "Select City",
+    "Kandy",
+    "Colombo",
+    "Trincomalee",
+    "Galle"
+  ];
   final List<String> subjects = [
     "Select Subject",
     "Mathematics",
     "Science",
     "English",
-    "History",
-    "Physics",
-    "Chemistry"
   ];
   final List<String> weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -46,7 +52,7 @@ class _FindTutorState extends State<FindTutor> {
               context,
               MaterialPageRoute(
                   builder: (context) => FirstScreen(
-                        userName: 'Buthxi',
+                        userName: 'Imalsha',
                       )),
             );
           },
@@ -320,9 +326,25 @@ class _FindTutorState extends State<FindTutor> {
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
-                      // Apply filter logic
-                      print("Filters Applied");
-                      print("Selected Dates: $selectedDates");
+                      //final filter = TutorFilter(
+                      //city: selectedCity,
+                      //tuitionType: tuitionType,
+                      //tuitionMedium: tuitionMedium,
+                      //level: level,
+                      //subject: selectedSubject,
+                      //selectedDates: selectedDates,
+                      //time: time,
+                      //minFee: minFee,
+                      //maxFee: maxFee);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FilterProfile(
+                              selectedCity: selectedCity,
+                              selectedSubject: selectedSubject,
+                            ),
+                          ));
                     },
                     child: const Text("Apply"),
                   ),

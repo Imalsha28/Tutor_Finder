@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_1/pages/find_tutor.dart';
 import 'package:project_1/pages/tutor.dart';
 import 'dart:convert';
 import 'package:project_1/models/tutor_model.dart';
@@ -49,7 +50,16 @@ class _TutorProfileState extends State<TutorProfile> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  FilterButton(label: "Filters", onPressed: () {}),
+                  FilterButton(
+                      label: "Filters",
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FindTutor(),
+                          ),
+                        );
+                      }),
                   FilterButton(label: "Location", onPressed: () {}),
                   FilterButton(label: "Fees", onPressed: () {}),
                   FilterButton(label: "Clear", onPressed: () {}),
@@ -77,6 +87,7 @@ class _TutorProfileState extends State<TutorProfile> {
                     final tutor = tutors[index];
                     return GestureDetector(
                       onTap: () {
+                        print("Tapped tutor: ${tutor.name}");
                         Navigator.push(
                           context,
                           MaterialPageRoute(

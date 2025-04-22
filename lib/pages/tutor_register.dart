@@ -23,6 +23,8 @@ class _TutorRegisterState extends State<TutorRegister> {
 
   String selectedLocation = "Select Location";
   String selectedCity = "Select City";
+  String availableDates = "availabelDates";
+  String time = "time";
   String tuitionType = "Online";
   String tuitionLevel = "O Level";
   String tuitionMedium = "English";
@@ -115,6 +117,24 @@ class _TutorRegisterState extends State<TutorRegister> {
               ),
               const SizedBox(height: 10),
 
+              // Tuition dates
+              _buildToggleButtons(
+                title: "Available Dates",
+                options: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+                selectedOption: availableDates,
+                onSelected: (value) => setState(() => availableDates = value),
+              ),
+              const SizedBox(height: 10),
+
+              // Tuition time
+              _buildToggleButtons(
+                title: "Available Time",
+                options: ["8am", "10am", "2pm", "4pm", "6pm", "8pm"],
+                selectedOption: time,
+                onSelected: (value) => setState(() => time = value),
+              ),
+              const SizedBox(height: 10),
+
               // Fees Range
               const Text(
                 "Fees Range",
@@ -194,6 +214,8 @@ class _TutorRegisterState extends State<TutorRegister> {
                       onPressed: () async {
                         TutorModel tutor = TutorModel(
                             name: nameController.text,
+                            time: time,
+                            availableDates: availableDates,
                             subjects: subjectController.text,
                             description: descriptionController.text,
                             tuitionType: tuitionType,

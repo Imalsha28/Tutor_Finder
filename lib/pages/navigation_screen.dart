@@ -17,7 +17,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   // Define the pages for the navigation
   final List<Widget> pages = [
     FirstScreen(
-      userName: 'Buthxi',
+      userName: 'Imalsha',
     ),
     FindTutor(),
     UserProfile(),

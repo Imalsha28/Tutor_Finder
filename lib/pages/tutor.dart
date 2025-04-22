@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/models/tutor_model.dart';
 
-class Tutor extends StatelessWidget {
+class Tutor extends StatefulWidget {
   const Tutor({super.key});
 
+  @override
+  State<Tutor> createState() => _TutorState();
+}
+
+class _TutorState extends State<Tutor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,7 @@ class Tutor extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Sheldon Lee Cooper',
+                      'Imalsha Wanigasooriya',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -66,7 +72,7 @@ class Tutor extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Mathematics Tutor',
+                      'English',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -97,12 +103,11 @@ class Tutor extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildDetailRow(Icons.school, 'O Level Mathematics'),
+                      _buildDetailRow(Icons.school, 'O Level'),
                       const Divider(height: 24),
-                      _buildDetailRow(Icons.location_on, 'Kottawa, Sri Lanka'),
+                      _buildDetailRow(Icons.location_on, 'Colombo'),
                       const Divider(height: 24),
-                      _buildDetailRow(
-                          Icons.videocam, 'Online/In-person Classes'),
+                      _buildDetailRow(Icons.videocam, 'Online'),
                       const Divider(height: 24),
                       _buildDetailRow(Icons.money, 'Rs. 1500 / Month'),
                     ],
@@ -130,24 +135,24 @@ class Tutor extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: const [
-                    _ScheduleDay(day: 'Mon', selected: true),
-                    _ScheduleDay(day: 'Tue'),
-                    _ScheduleDay(day: 'Wed', selected: true),
-                    _ScheduleDay(day: 'Thu'),
-                    _ScheduleDay(day: 'Fri', selected: true),
-                    _ScheduleDay(day: 'Sat'),
-                    _ScheduleDay(day: 'Sun'),
+                    _ScheduleDay(day: 'Mo'),
+                    _ScheduleDay(day: 'Tu'),
+                    _ScheduleDay(day: 'We', selected: true),
+                    _ScheduleDay(day: 'Th'),
+                    _ScheduleDay(day: 'Fr'),
+                    _ScheduleDay(day: 'Sa'),
+                    _ScheduleDay(day: 'Su'),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
               // Time Slots
               const Wrap(
-                spacing: 8,
-                runSpacing: 8,
+                spacing: 10,
+                runSpacing: 10,
                 children: [
-                  _TimeSlot(time: '8:00 AM', selected: true),
-                  _TimeSlot(time: '10:00 AM'),
+                  _TimeSlot(time: '8:00 AM'),
+                  _TimeSlot(time: '10:00 AM', selected: true),
                   _TimeSlot(time: '2:00 PM'),
                   _TimeSlot(time: '4:00 PM'),
                   _TimeSlot(time: '6:00 PM'),

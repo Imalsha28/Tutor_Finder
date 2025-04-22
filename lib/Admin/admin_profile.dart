@@ -57,7 +57,8 @@ class _AdminProfileState extends State<AdminProfile> {
               // Admin Details
               _buildProfileDetail('Email', 'admin@tutorhive.com', Icons.email),
               _buildProfileDetail('Phone', '+94 77 123 4567', Icons.phone),
-              _buildProfileDetail('Joined', 'March 2024', Icons.calendar_today),
+              _buildProfileDetail(
+                  'Joined', '17 March 2025', Icons.calendar_today),
 
               SizedBox(height: 30),
 

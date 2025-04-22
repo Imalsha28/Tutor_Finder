@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/pages/Location.dart';
+import 'package:project_1/pages/pick/sci.dart';
 import 'package:project_1/pages/tutor_profile.dart';
 import 'package:project_1/pages/tutor_register.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   final String userName;
 
   const FirstScreen({super.key, required this.userName});
 
   @override
-  Widget build(BuildContext context) {
-    String selectedLocation = "Set your Location";
-    String selectedLanguage = "Select Language"; // Default dropdown value
+  State<FirstScreen> createState() => _FirstScreenState();
+}
 
+class _FirstScreenState extends State<FirstScreen> {
+  String selectedLocation = "Colombo";
+  String selectedLanguage = "English";
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         elevation: 0,
         title: Text(
-          'Hi, $userName! 👋',
+          'Hi, ${widget.userName}! 👋',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -84,10 +90,13 @@ class FirstScreen extends StatelessWidget {
                             icon: const Icon(Icons.arrow_drop_down,
                                 color: Colors.grey),
                             items: <String>[
-                              "Set your Location",
+                              "Matara",
                               "Colombo",
                               "Galle",
                               "Kandy",
+                              "Anuradhapura",
+                              "Trincomalee",
+                              "Jaffna",
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -98,6 +107,9 @@ class FirstScreen extends StatelessWidget {
                               );
                             }).toList(),
                             onChanged: (String? newValue) {
+                              setState(() {
+                                selectedLocation = newValue!;
+                              });
                               if (newValue == "Set your Location") {
                                 // Navigate to the Search Location Screen
                                 Navigator.push(
@@ -132,7 +144,7 @@ class FirstScreen extends StatelessWidget {
                           value: selectedLanguage,
                           icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
                           items: <String>[
-                            "Select Language",
+                            "සිංහල",
                             "English",
                             "Tamil",
                           ].map<DropdownMenuItem<String>>((String value) {
@@ -145,6 +157,9 @@ class FirstScreen extends StatelessWidget {
                             );
                           }).toList(),
                           onChanged: (String? newValue) {
+                            setState(() {
+                              selectedLanguage = newValue!;
+                            });
                             print("Selected Language: $newValue");
                           },
                         )),
@@ -161,7 +176,7 @@ class FirstScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    "Pick a Category",
+                    "Pick a Subject",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -174,19 +189,19 @@ class FirstScreen extends StatelessWidget {
                     children: [
                       // O Level Category Card
                       CategoryCard(
-                        label: "O Level",
+                        label: "Science",
                         icon: Icons.school,
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const TutorProfile()),
+                                builder: (context) => const Sci()),
                           );
                         },
                       ),
                       // A Level Category Card
                       CategoryCard(
-                        label: "A Level",
+                        label: "English",
                         icon: Icons.school,
                         onTap: () {
                           Navigator.push(
