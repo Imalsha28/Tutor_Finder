@@ -7,4 +7,11 @@ class DatabaseMethods {
         .doc(userId)
         .set(userInfoMap);
   }
+
+  Future<void> addSubject(String id, Map<String, dynamic> subjectMap) {
+    return FirebaseFirestore.instance
+        .collection("subjects")
+        .doc(id)
+        .set(subjectMap);
+  }
 }

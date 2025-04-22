@@ -3,6 +3,7 @@ import 'package:project_1/pages/Location.dart';
 import 'package:project_1/pages/pick/sci.dart';
 import 'package:project_1/pages/tutor_profile.dart';
 import 'package:project_1/pages/tutor_register.dart';
+import 'package:project_1/pages/view_subject.dart';
 
 class FirstScreen extends StatefulWidget {
   final String userName;
@@ -175,13 +176,33 @@ class _FirstScreenState extends State<FirstScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  const Text(
-                    "Pick a Subject",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Pick a Subject",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewSubject()));
+                        },
+                        child: Text(
+                          "See All",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.deepPurple,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 16),
                   Row(

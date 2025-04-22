@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/pages/tutor.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:project_1/models/tutor_model.dart';
@@ -64,6 +65,8 @@ class _FilterProfileState extends State<FilterProfile> {
                     trailing: Text(tutor.tuitionLevel),
                     onTap: () {
                       // Navigate to detail if needed
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Tutor()));
                     },
                   ),
                 );
