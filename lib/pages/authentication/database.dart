@@ -14,4 +14,8 @@ class DatabaseMethods {
         .doc(id)
         .set(subjectMap);
   }
+
+  Future<void> addTutor(Map<String, dynamic> tutorMap) {
+    return FirebaseFirestore.instance.collection("tutors").add(tutorMap);
+  }
 }

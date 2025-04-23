@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project_1/Admin/coustom_drawer.dart';
 
@@ -9,6 +10,29 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  int totalUsers = 0;
+  int totalTutors = 0;
+  int totalStudents = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCounts();
+  }
+
+  //Fetch total users from Firestore
+  Future<void> fetchCounts() async {
+    QuerySnapshot userSnapshot =
+        await FirebaseFirestore.instance.collection('users').get();
+    QuerySnapshot tutorSnapshot =
+        await FirebaseFirestore.instance.collection('tutors').get();
+    setState(() {
+      totalUsers = userSnapshot.docs.length;
+      totalTutors = tutorSnapshot.docs.length;
+      totalStudents = totalUsers - totalTutors;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,38 +42,104 @@ class _DashboardState extends State<Dashboard> {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: Colors.deepPurple,
           ),
         ),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        iconTheme: IconThemeData(color: Colors.deepPurple),
       ),
       drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Dashboard',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Dashboard',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: _buildCard(
-                  context, 'Total Users', '27', Colors.deepPurple, 200, 400),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCard(context, 'Tutors', '7', Colors.orange, 200, 170),
-                SizedBox(width: 20),
-                _buildCard(context, 'Students', '20', Colors.blue, 200, 170),
-              ],
-            ),
-          ],
+              SizedBox(height: 20),
+              Center(
+                child: _buildCard(
+                  context,
+                  'Total Users',
+                  totalUsers.toString(),
+                  Colors.deepPurple,
+                  180,
+                  370,
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildCard(
+                    context,
+                    'Tutors',
+                    totalTutors.toString(),
+                    Colors.orange,
+                    160,
+                    170,
+                  ),
+                  SizedBox(width: 20),
+                  _buildCard(
+                    context,
+                    'Students',
+                    totalStudents.toString(),
+                    Colors.blue,
+                    160,
+                    170,
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Featured',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey[800],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: Container(
+                        height: 170,
+                        width: 370,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          image: DecorationImage(
+                            image: AssetImage('assets/card1.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 8,
+                              spreadRadius: 2,
+                              offset: Offset(2, 4),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -68,12 +158,16 @@ class _DashboardState extends State<Dashboard> {
       child: Container(
         height: height,
         width: width,
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           boxShadow: [
-            BoxShadow(color: Colors.black12, blurRadius: 6, spreadRadius: 2),
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              spreadRadius: 2,
+            ),
           ],
         ),
         child: Column(
@@ -82,13 +176,19 @@ class _DashboardState extends State<Dashboard> {
             Text(
               title,
               style: TextStyle(
-                  color: color, fontSize: 20, fontWeight: FontWeight.bold),
+                color: color,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 6),
             Text(
               value,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -97,7 +197,8 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-// Placeholder pages for navigation
+// Other pages
+
 class SubjectManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

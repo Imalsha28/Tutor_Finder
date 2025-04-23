@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/models/tutor_model.dart';
+import 'package:project_1/pages/authentication/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TutorRegister extends StatefulWidget {
   const TutorRegister({super.key});
@@ -246,14 +248,25 @@ class _TutorRegisterState extends State<TutorRegister> {
 
 // Step 4: Save back to SharedPreferences
                         await prefs.setString('tutors', updatedTutorsString);
+// save to firebase
+                        try {
+                          await DatabaseMethods().addTutor(tutor.toJson());
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Registered as tutor successfully!'),
-                            backgroundColor: Colors.green,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text('Registered as tutor successfully!'),
+                              backgroundColor: Colors.green,
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Error saving to Successfully:$e'),
+                            backgroundColor: Colors.red,
+                            duration: const Duration(seconds: 2),
+                          ));
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
