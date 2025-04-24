@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/models/tutor_model.dart';
+import 'package:project_1/pages/reviews.dart';
 
 class Tutor extends StatefulWidget {
   const Tutor({super.key});
@@ -194,7 +195,7 @@ class _TutorState extends State<Tutor> {
               // Reviews Button
               OutlinedButton.icon(
                 icon: const Icon(Icons.star_rate_rounded, color: Colors.amber),
-                label: const Text('4.8 (128 Reviews)'),
+                label: const Text('Reviews  '),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.deepPurple,
                   side: const BorderSide(color: Colors.deepPurple),
@@ -203,7 +204,12 @@ class _TutorState extends State<Tutor> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReviewsPage()),
+                  );
+                },
               ),
             ],
           ),
