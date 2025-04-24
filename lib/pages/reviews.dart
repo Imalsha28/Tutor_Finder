@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ReviewsPage extends StatefulWidget {
   const ReviewsPage({super.key});
@@ -8,18 +9,14 @@ class ReviewsPage extends StatefulWidget {
 }
 
 class _ReviewsPageState extends State<ReviewsPage> {
-  final List<String> _reviews = [
-    'Great tutor! Helped me a lot.',
-    'Very kind and patient!',
-  ];
   final TextEditingController _controller = TextEditingController();
 
-  void _addReview() {
+  void _sendReview() async {
     if (_controller.text.isNotEmpty) {
-      setState(() {
-        _reviews.add(_controller.text);
-        _controller.clear();
+      await FirebaseFirestore.instance.collection('reviews').add({
+        'text': _controller.text,
       });
+      _controller.clear();
     }
   }
 
@@ -28,23 +25,34 @@ class _ReviewsPageState extends State<ReviewsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Reviews"),
-        centerTitle: true,
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _reviews.length,
-              itemBuilder: (context, index) => Card(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Text(_reviews[index]),
-                ),
-              ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('reviews').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final docs = snapshot.data!.docs;
+                return ListView.builder(
+                  itemCount: docs.length,
+                  padding: const EdgeInsets.all(16),
+                  itemBuilder: (context, index) {
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(docs[index]['text']),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
           const Divider(height: 1),
@@ -63,7 +71,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.send, color: Colors.deepPurple),
-                  onPressed: _addReview,
+                  onPressed: _sendReview,
                 )
               ],
             ),
