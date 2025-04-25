@@ -57,17 +57,72 @@ class _FilterProfileState extends State<FilterProfile> {
               itemCount: filteredTutor.length,
               itemBuilder: (context, index) {
                 final tutor = filteredTutor[index];
-                return Card(
-                  margin: const EdgeInsets.all(8),
-                  child: ListTile(
-                    title: Text(tutor.name),
-                    subtitle: Text("${tutor.subjects} • ${tutor.city}"),
-                    trailing: Text(tutor.tuitionLevel),
-                    onTap: () {
-                      // Navigate to detail if needed
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Tutor()));
-                    },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Tutor()),
+                    );
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 4,
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(40),
+                                child: Image.asset(
+                                  'assets/tutor1.jpg',
+                                  width: 70,
+                                  height: 70,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tutor.name,
+                                      style: const TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      "${tutor.subjects} • ${tutor.city}",
+                                      style: const TextStyle(
+                                          fontSize: 18, color: Colors.grey),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      tutor.tuitionLevel,
+                                      style: const TextStyle(
+                                          fontSize: 18, color: Colors.black54),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Icon(Icons.favorite_border_outlined,
+                              color: Colors.deepPurpleAccent),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/models/tutor_model.dart';
 import 'package:project_1/pages/reviews.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Tutor extends StatefulWidget {
   const Tutor({super.key});
@@ -10,6 +11,9 @@ class Tutor extends StatefulWidget {
 }
 
 class _TutorState extends State<Tutor> {
+  final String phoneNumber = '+94771234567';
+  final String whatsappNumber = '+94771234567';
+  final String smsMessage = 'Hello, I am interested in your tutoring services.';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,6 +174,7 @@ class _TutorState extends State<Tutor> {
                       color: Colors.green,
                       icon: Icons.call,
                       label: 'Call',
+                      onPressed: () => _launchDialer(phoneNumber),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -178,6 +183,8 @@ class _TutorState extends State<Tutor> {
                       color: Colors.green,
                       icon: Icons.message,
                       label: 'WhatsApp',
+                      onPressed: () =>
+                          _launchWhatsApp(whatsappNumber, smsMessage),
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -186,6 +193,7 @@ class _TutorState extends State<Tutor> {
                       color: Colors.deepPurple,
                       icon: Icons.email,
                       label: 'Message',
+                      onPressed: () => _launchSMS(phoneNumber, smsMessage),
                     ),
                   ),
                 ],
@@ -258,6 +266,7 @@ class _TutorState extends State<Tutor> {
     required Color color,
     required IconData icon,
     required String label,
+    required VoidCallback onPressed,
   }) {
     return ElevatedButton.icon(
       icon: Icon(icon, color: Colors.white),
@@ -270,8 +279,37 @@ class _TutorState extends State<Tutor> {
         ),
         padding: const EdgeInsets.symmetric(vertical: 12),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
     );
+  }
+
+  void _launchDialer(String number) async {
+    final Uri url = Uri(scheme: 'tel', path: number);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch dialer';
+    }
+  }
+
+  void _launchSMS(String number, String message) async {
+    final Uri url =
+        Uri(scheme: 'sms', path: number, queryParameters: {'body': message});
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch SMS';
+    }
+  }
+
+  void _launchWhatsApp(String number, String message) async {
+    final Uri url = Uri.parse(
+        'https://wa.me/${number.replaceAll('+', '')}?text=${Uri.encodeComponent(message)}');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not open WhatsApp';
+    }
   }
 }
 
