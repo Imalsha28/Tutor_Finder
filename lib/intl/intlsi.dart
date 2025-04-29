@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/intl/intlta.dart';
-import 'package:project_1/pages/Location.dart';
-import 'package:project_1/pages/pick/sci.dart';
-import 'package:project_1/pages/tutor_profile.dart';
-import 'package:project_1/pages/tutor_register.dart';
-import 'package:project_1/pages/view_subject.dart';
-import 'package:project_1/intl/intlsi.dart';
 
-class FirstScreen extends StatefulWidget {
-  final String userName;
-
-  const FirstScreen({super.key, required this.userName});
+class Intlsi extends StatefulWidget {
+  const Intlsi({super.key});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<Intlsi> createState() => _IntlsiState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
-  String selectedLocation = "Colombo";
+class _IntlsiState extends State<Intlsi> {
+  String selectedLocation = "කොලබ";
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +18,7 @@ class _FirstScreenState extends State<FirstScreen> {
         backgroundColor: Colors.deepPurple,
         elevation: 0,
         title: Text(
-          'Hi, ${widget.userName}! 👋',
+          'හායි,ඉමල්ෂා ! 👋',
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -58,7 +50,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   TextField(
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                      hintText: "Search a Tutor",
+                      hintText: "උපදේශකයෙකු සොයන්න",
                       hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
@@ -92,13 +84,13 @@ class _FirstScreenState extends State<FirstScreen> {
                             icon: const Icon(Icons.arrow_drop_down,
                                 color: Colors.grey),
                             items: <String>[
-                              "Matara",
-                              "Colombo",
-                              "Galle",
-                              "Kandy",
-                              "Anuradhapura",
-                              "Trincomalee",
-                              "Jaffna",
+                              "මාතර",
+                              "කොලබ",
+                              "ගාල්ල",
+                              "නුවර",
+                              "අනුරාධපුර",
+                              "ත්‍රිකුණාමලය",
+                              "යාපනය",
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -114,12 +106,6 @@ class _FirstScreenState extends State<FirstScreen> {
                               });
                               if (newValue == "Set your Location") {
                                 // Navigate to the Search Location Screen
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SearchLocationScreen()),
-                                );
                               } else {
                                 // Handle other selections (e.g., update selectedLocation)
                                 print("Selected location: $newValue");
@@ -133,18 +119,14 @@ class _FirstScreenState extends State<FirstScreen> {
                         children: [
                           LanguageButton(
                             label: "සිං",
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Intlsi()),
-                              );
-                            },
+                            onTap: () {},
                           ),
                           const SizedBox(width: 5),
                           LanguageButton(
                             label: "Eng",
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           ),
                           const SizedBox(width: 5),
                           LanguageButton(
@@ -173,7 +155,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Pick a Subject",
+                        "විෂයක් තෝරන්න",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -181,14 +163,9 @@ class _FirstScreenState extends State<FirstScreen> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ViewSubject()));
-                        },
+                        onPressed: () {},
                         child: Text(
-                          "See All",
+                          "සියල්ල බලන්න",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.deepPurple,
@@ -203,27 +180,15 @@ class _FirstScreenState extends State<FirstScreen> {
                     children: [
                       // O Level Category Card
                       CategoryCard(
-                        label: "Science",
+                        label: "විද්යාව",
                         icon: Icons.school,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Sci()),
-                          );
-                        },
+                        onTap: () {},
                       ),
                       // A Level Category Card
                       CategoryCard(
-                        label: "English",
+                        label: "ඉංග්රීසි",
                         icon: Icons.school,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TutorProfile()),
-                          );
-                        },
+                        onTap: () {},
                       ),
                     ],
                   ),
@@ -249,13 +214,7 @@ class _FirstScreenState extends State<FirstScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const TutorRegister()),
-                  );
-                },
+                onTap: () {},
                 child: Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
@@ -284,7 +243,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         ),
                         const SizedBox(width: 16),
                         const Text(
-                          "Register as a Tutor",
+                          "උපදේශකයෙකු ලෙස\n ලියාපදිංචි වන්න",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
