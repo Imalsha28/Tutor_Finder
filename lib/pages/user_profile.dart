@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_1/pages/befor_mytute.dart';
+import 'package:project_1/pages/mytutor_profile.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -77,9 +79,29 @@ class _UserProfileState extends State<UserProfile> {
             // Profile Fields
             _buildProfileField(Icons.person, name),
             const SizedBox(height: 10),
-            _buildProfileField(Icons.phone, '+123 456 7890'),
+            _buildProfileField(Icons.phone, '077 777 7777'),
             const SizedBox(height: 10),
             _buildProfileField(Icons.email, email),
+
+            SizedBox(height: 20),
+            _buildDualNavigationTile(
+                icon: Icons.visibility,
+                text: "My Tutor Profile",
+                onTileTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => MytutorProfile()));
+                },
+                onArrowTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => BeforMytute()));
+                }),
+            SizedBox(height: 10),
+            _buildDualNavigationTile(
+              icon: Icons.edit,
+              text: "Update Your Profile",
+              onTileTap: () {},
+              onArrowTap: () {},
+            ),
 
             const SizedBox(height: 30),
             // Logout Button
@@ -121,10 +143,43 @@ class _UserProfileState extends State<UserProfile> {
           IconButton(
             icon: const Icon(Icons.edit, color: Colors.grey),
             onPressed: () {
-              // Handle edit action
+              //  edit action
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDualNavigationTile({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTileTap,
+    required VoidCallback onArrowTap,
+  }) {
+    return GestureDetector(
+      onTap: onTileTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.black54),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                text,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.arrow_forward_ios, size: 16),
+              onPressed: onArrowTap,
+            ),
+          ],
+        ),
       ),
     );
   }

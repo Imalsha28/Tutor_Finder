@@ -68,7 +68,7 @@ class _TutorState extends State<Tutor> {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Imalsha Wanigasooriya',
+                      'Upul Wanigasooriya',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -140,9 +140,9 @@ class _TutorState extends State<Tutor> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: const [
-                    _ScheduleDay(day: 'Mo'),
+                    _ScheduleDay(day: 'Mo', selected: true),
                     _ScheduleDay(day: 'Tu'),
-                    _ScheduleDay(day: 'We', selected: true),
+                    _ScheduleDay(day: 'We'),
                     _ScheduleDay(day: 'Th'),
                     _ScheduleDay(day: 'Fr'),
                     _ScheduleDay(day: 'Sa'),
@@ -156,8 +156,8 @@ class _TutorState extends State<Tutor> {
                 spacing: 10,
                 runSpacing: 10,
                 children: [
-                  _TimeSlot(time: '8:00 AM'),
-                  _TimeSlot(time: '10:00 AM', selected: true),
+                  _TimeSlot(time: '8:00 AM', selected: true),
+                  _TimeSlot(time: '10:00 AM'),
                   _TimeSlot(time: '2:00 PM'),
                   _TimeSlot(time: '4:00 PM'),
                   _TimeSlot(time: '6:00 PM'),
@@ -190,7 +190,7 @@ class _TutorState extends State<Tutor> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: _buildActionButton(
-                      color: Colors.deepPurple,
+                      color: Colors.green,
                       icon: Icons.email,
                       label: 'Message',
                       onPressed: () => _launchSMS(phoneNumber, smsMessage),
