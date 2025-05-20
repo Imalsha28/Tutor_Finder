@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:project_1/pages/befor_mytute.dart';
 import 'package:project_1/pages/mytutor_profile.dart';
+import 'package:project_1/pages/update_mytute.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -99,7 +101,10 @@ class _UserProfileState extends State<UserProfile> {
             _buildDualNavigationTile(
               icon: Icons.edit,
               text: "Update Your Profile",
-              onTileTap: () {},
+              onTileTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => UpdateMytute()));
+              },
               onArrowTap: () {},
             ),
 

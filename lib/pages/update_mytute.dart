@@ -1,82 +1,92 @@
 import 'package:flutter/material.dart';
 
-class MytutorProfile extends StatelessWidget {
-  const MytutorProfile({super.key});
+class UpdateMytute extends StatelessWidget {
+  const UpdateMytute({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController =
+        TextEditingController(text: 'Imalsha Wanigasooriya');
+    final TextEditingController aboutController = TextEditingController(
+        text:
+            "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor in industry.");
+    final TextEditingController expController =
+        TextEditingController(text: '2 year Teaching Exp');
+    final TextEditingController feeController =
+        TextEditingController(text: 'Rs.2000 | Monthly');
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.grey[100],
+        title: const Text(
+          'Edit Tutor Profile',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'My Tutor Profile',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple,
-              ),
-            ),
-            const SizedBox(height: 20),
-
             // Profile image
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/student.jpg'),
             ),
             const SizedBox(height: 12),
 
-            // Name and About
-            const Text(
-              'Imalsha Wanigasooriya',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              'About',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-              child: Text(
-                "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor in industry. I'm from Kottawa.",
-                textAlign: TextAlign.center,
-                style: TextStyle(height: 1.4),
+            // Name field
+            TextFormField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                labelText: 'Full Name',
+                border: OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 12),
 
+            // About field
+            TextFormField(
+              controller: aboutController,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                labelText: 'About',
+                border: OutlineInputBorder(),
+              ),
+            ),
             const SizedBox(height: 20),
 
-            // Info Rows
-            _infoRow("Subjects", "English"),
-            _infoRow("Grade Level", "O Level"),
-            _infoRow("Tuition Type", "Online"),
-            _infoRow("Tuition medium", "English"),
-            _infoRow("Location", "Kottawa"),
+            // Dropdowns
+            _buildDropdown('Subject', 'Art', ['Art', 'Math', 'Science']),
+            _buildDropdown(
+                'Grade Level', 'O Level', ['Primary', 'O Level', 'A Level']),
+            _buildDropdown('Tuition Type', 'Online', ['Online', 'Physical']),
+            _buildDropdown('Medium', 'English', ['English', 'Sinhala']),
+            _buildDropdown('Location', 'Kottawa',
+                ['Kottawa', 'Colombo', 'Galle', 'Kandy']),
 
             const SizedBox(height: 14),
 
             // Experience & Fee
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _boxText("2 year Teaching Exp"),
-                const SizedBox(width: 10),
-                _boxText("Rs.2000 | Monthly"),
-              ],
+            TextFormField(
+              controller: expController,
+              decoration: const InputDecoration(
+                labelText: 'Experience',
+                border: OutlineInputBorder(),
+              ),
             ),
-
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: feeController,
+              decoration: const InputDecoration(
+                labelText: 'Fee',
+                border: OutlineInputBorder(),
+              ),
+            ),
             const SizedBox(height: 24),
-            const Divider(thickness: 1),
-            const SizedBox(height: 10),
+            const Divider(),
 
             // Schedule
             const Align(
@@ -86,7 +96,6 @@ class MytutorProfile extends StatelessWidget {
             ),
             const SizedBox(height: 14),
 
-            // Date Section
             _sectionLabel("Date"),
             const SizedBox(height: 10),
             _buildDateRow(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
@@ -94,50 +103,47 @@ class MytutorProfile extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Time Section
             _sectionLabel("Time"),
             const SizedBox(height: 10),
             _buildTimeRow(["Morning", "Evening", "Night"],
                 selectedTimes: ["Morning"]),
+
+            const SizedBox(height: 30),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                minimumSize: const Size.fromHeight(50),
+              ),
+              onPressed: () {},
+              child: const Text("Save Profile",
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _infoRow(String title, String value) {
+  Widget _buildDropdown(String label, String initial, List<String> items) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("$title: ", style: const TextStyle(fontWeight: FontWeight.w600)),
-          Expanded(
-            child: Text(value, style: const TextStyle(color: Colors.black87)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _boxText(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          )
-        ],
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(fontWeight: FontWeight.w500),
+      padding: const EdgeInsets.only(bottom: 12),
+      child: DropdownButtonFormField<String>(
+        value: initial,
+        decoration: InputDecoration(
+          labelText: label,
+          border: const OutlineInputBorder(),
+        ),
+        onChanged: (value) {},
+        items: items.map((item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
       ),
     );
   }
