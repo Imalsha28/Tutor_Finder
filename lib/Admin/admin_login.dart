@@ -27,8 +27,8 @@ class _AdminLoginState extends State<AdminLogin> {
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                   gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 185, 22, 171),
-                Color.fromARGB(255, 98, 29, 81),
+                Color.fromARGB(255, 187, 33, 218),
+                Color.fromARGB(255, 89, 29, 98),
                 Color(0xFF311937),
               ])),
               child: const Text(
@@ -98,8 +98,8 @@ class _AdminLoginState extends State<AdminLogin> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             gradient: const LinearGradient(colors: [
-                              Color.fromARGB(255, 185, 22, 171),
-                              Color.fromARGB(255, 98, 29, 81),
+                              Color.fromARGB(255, 187, 33, 218),
+                              Color.fromARGB(255, 89, 29, 98),
                               Color(0xFF311937),
                             ]),
                             borderRadius: BorderRadius.circular(30.0)),

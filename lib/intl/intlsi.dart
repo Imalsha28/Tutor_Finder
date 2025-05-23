@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlta.dart';
 
 class Intlsi extends StatefulWidget {
@@ -133,9 +134,12 @@ class _IntlsiState extends State<Intlsi> {
                             label: "தமி",
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Intlta()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      NavigationWrapper(child: Intlta()),
+                                ),
+                              );
                             },
                           ),
                         ],

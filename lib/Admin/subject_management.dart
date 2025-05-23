@@ -14,23 +14,24 @@ class SubjectManagement extends StatefulWidget {
 
 class _SubjectManagementState extends State<SubjectManagement> {
   TextEditingController subjectnameController = TextEditingController();
+
   Future<void> uploadSubject() async {
     String name = subjectnameController.text.trim();
     if (name.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Please Enter a Subject name")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please Enter a Subject name")));
       return;
     }
     String id = randomAlphaNumeric(10);
     Map<String, dynamic> addSubject = {
       'id': id,
-      'name': subjectnameController.text,
+      'name': name,
       'createdAt': Timestamp.now(),
     };
     await DatabaseMethods().addSubject(id, addSubject);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       backgroundColor: Colors.green,
-      content: Text("Subject has been uploaded successfuly"),
+      content: Text("Subject has been uploaded successfully"),
     ));
     subjectnameController.clear();
     setState(() {});
@@ -58,8 +59,6 @@ class _SubjectManagementState extends State<SubjectManagement> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
-
-              // Subject Name Input
               TextField(
                 controller: subjectnameController,
                 decoration: InputDecoration(
@@ -70,8 +69,6 @@ class _SubjectManagementState extends State<SubjectManagement> {
                 ),
               ),
               const SizedBox(height: 16),
-
-              // Save Button
               Center(
                 child: ElevatedButton(
                   onPressed: uploadSubject,
@@ -87,29 +84,28 @@ class _SubjectManagementState extends State<SubjectManagement> {
                 ),
               ),
               const SizedBox(height: 32),
-
               const Text(
                 'All Subjects',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-
-              // Subject List Display
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('subjects')
                     .orderBy('createdAt', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) return CircularProgressIndicator();
+                  if (!snapshot.hasData)
+                    return const CircularProgressIndicator();
 
                   final subjects = snapshot.data!.docs;
 
                   return GridView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: subjects.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
@@ -120,20 +116,75 @@ class _SubjectManagementState extends State<SubjectManagement> {
 
                       return Container(
                         decoration: BoxDecoration(
-                          color: Colors.deepPurple,
+                          color: const Color.fromARGB(255, 136, 91, 214),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Stack(
                           children: [
-                            Icon(Icons.school, color: Colors.white, size: 48),
-                            const SizedBox(height: 12),
-                            Text(
-                              subject['name'],
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                            Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.school,
+                                      color: Colors.white, size: 48),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    subject['name'],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  bool confirm = await showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text("Delete Subject"),
+                                      content: const Text(
+                                          "Are you sure you want to delete this subject?"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, false),
+                                          child: const Text("Cancel"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, true),
+                                          child: const Text("Delete",
+                                              style:
+                                                  TextStyle(color: Colors.red)),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+
+                                  if (confirm) {
+                                    await FirebaseFirestore.instance
+                                        .collection('subjects')
+                                        .doc(subject.id)
+                                        .delete();
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            "Subject deleted successfully"),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: const Icon(Icons.delete,
+                                    color: Color.fromARGB(255, 232, 37, 37)),
+                              ),
                             ),
                           ],
                         ),

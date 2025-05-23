@@ -14,7 +14,7 @@ class NavigationScreen extends StatefulWidget {
 class _NavigationScreenState extends State<NavigationScreen> {
   int pageIndex = 0;
 
-  // Define the pages for the navigation
+  // Define  pages for the navigation
   final List<Widget> pages = [
     FirstScreen(
       userName: 'Imalsha',

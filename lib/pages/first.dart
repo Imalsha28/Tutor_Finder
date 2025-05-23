@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlta.dart';
 import 'package:project_1/pages/Location.dart';
 import 'package:project_1/pages/pick/sci.dart';
@@ -137,7 +138,9 @@ class _FirstScreenState extends State<FirstScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Intlsi()),
+                                  builder: (context) =>
+                                      NavigationWrapper(child: Intlsi()),
+                                ),
                               );
                             },
                           ),
@@ -151,9 +154,12 @@ class _FirstScreenState extends State<FirstScreen> {
                             label: "தமி",
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Intlta()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      NavigationWrapper(child: Intlta()),
+                                ),
+                              );
                             },
                           ),
                         ],
