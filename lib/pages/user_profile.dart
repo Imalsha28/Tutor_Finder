@@ -82,7 +82,7 @@ class _UserProfileState extends State<UserProfile> {
             // Profile Fields
             _buildProfileField(Icons.person, name),
             const SizedBox(height: 10),
-            _buildProfileField(Icons.phone, '077 777 7777'),
+            _buildProfileField(Icons.phone, 'Add phone number'),
             const SizedBox(height: 10),
             _buildProfileField(Icons.email, email),
 
