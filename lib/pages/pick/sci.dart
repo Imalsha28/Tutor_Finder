@@ -10,45 +10,70 @@ class Sci extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tutors Profiles"),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ListView(
-          children: [
-            // First Card - Ms. Lumi
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Lumi()));
-              },
-              child: _buildTutorCard(
-                name: "Lumi Wijesekara",
-                subject: "Science",
-                type: "Online",
-                level: "A Level",
-                fee: "1400",
-                imagePath: 'assets/tutor1.jpg',
+      body: Column(
+        children: [
+          // Filter bar
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  FilterButton(
+                    label: "Filters",
+                    onPressed: () {},
+                  ),
+                  FilterButton(label: "Location", onPressed: () {}),
+                  FilterButton(label: "Fees", onPressed: () {}),
+                  FilterButton(label: "Clear", onPressed: () {}),
+                ],
               ),
             ),
+          ),
 
-            // Second Card - Mr. Alex
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Alex()));
-              },
-              child: _buildTutorCard(
-                name: "Alex Steffan",
-                subject: "Science",
-                type: "In Person",
-                level: "O Level",
-                fee: "1200",
-                imagePath: 'assets/tutor1.jpg',
+          // Tutor list
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Lumi()));
+                    },
+                    child: _buildTutorCard(
+                      name: "Lumi Wijesekara",
+                      subject: "Science",
+                      type: "Online",
+                      level: "A Level",
+                      fee: "1400",
+                      imagePath: 'assets/tutor1.jpg',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Alex()));
+                    },
+                    child: _buildTutorCard(
+                      name: "Alex Steffan",
+                      subject: "Science",
+                      type: "In Person",
+                      level: "O Level",
+                      fee: "1200",
+                      imagePath: 'assets/tutor1.jpg',
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -100,6 +125,32 @@ class Sci extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FilterButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+
+  const FilterButton({super.key, required this.label, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+        child: Text(label),
       ),
     );
   }
