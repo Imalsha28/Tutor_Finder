@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_1/pages/authentication/sign_in.dart';
 
 import 'package:project_1/pages/befor_mytute.dart';
 import 'package:project_1/pages/mytutor_profile.dart';
@@ -113,7 +114,8 @@ class _UserProfileState extends State<UserProfile> {
             TextButton.icon(
               onPressed: () {
                 _auth.signOut();
-                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignIn()));
               },
               icon: const Icon(Icons.logout, color: Colors.red),
               label: const Text(
