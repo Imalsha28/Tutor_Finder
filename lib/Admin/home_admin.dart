@@ -121,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
-                            image: AssetImage('assets/card1.jpg'),
+                            image: AssetImage('assets/tutorcard2.jpg'),
                             fit: BoxFit.cover,
                           ),
                           boxShadow: [

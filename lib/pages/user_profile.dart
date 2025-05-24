@@ -66,7 +66,7 @@ class _UserProfileState extends State<UserProfile> {
             // Profile Picture
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/student.jpg'),
+              backgroundImage: AssetImage('assets/user2.png'),
             ),
             SizedBox(height: 15),
             // User Name

@@ -23,7 +23,7 @@ class SinScience extends StatelessWidget {
                 type: "ඔන්ලයින්",
                 level: "A ලෙවල්",
                 fee: "1400",
-                imagePath: 'assets/tutor1.jpg',
+                imagePath: 'assets/user1.png',
               ),
             ),
 
@@ -36,7 +36,7 @@ class SinScience extends StatelessWidget {
                 type: "පුද්ගලිකව",
                 level: "O ලෙවල්",
                 fee: "1200",
-                imagePath: 'assets/tutor1.jpg',
+                imagePath: 'assets/user1.png',
               ),
             ),
           ],

@@ -63,12 +63,12 @@ class _TutorState extends State<Tutor> {
                       ),
                       child: const CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage('assets/tutor.png'),
+                        backgroundImage: AssetImage('assets/user1.png'),
                       ),
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Upul Wanigasooriya',
+                      'Imalsha Wanigasooriya',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -89,7 +89,6 @@ class _TutorState extends State<Tutor> {
                       children: [
                         _buildProfileButton(Icons.info_outline, 'About'),
                         const SizedBox(width: 20),
-                        _buildProfileButton(Icons.photo_camera_back, 'Photos'),
                       ],
                     ),
                   ],

@@ -20,7 +20,7 @@ class Lumi extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/tutor.png'),
+              backgroundImage: AssetImage('assets/user1.png'),
             ),
             const SizedBox(height: 12),
             const Text(
@@ -38,7 +38,6 @@ class Lumi extends StatelessWidget {
               children: [
                 _buildProfileButton(Icons.info_outline, 'About'),
                 const SizedBox(width: 20),
-                _buildProfileButton(Icons.photo_camera_back, 'Photos'),
               ],
             ),
 

@@ -52,7 +52,7 @@ class Sci extends StatelessWidget {
                       type: "Online",
                       level: "A Level",
                       fee: "1400",
-                      imagePath: 'assets/tutor1.jpg',
+                      imagePath: 'assets/user1.png',
                     ),
                   ),
                   GestureDetector(
@@ -66,7 +66,7 @@ class Sci extends StatelessWidget {
                       type: "In Person",
                       level: "O Level",
                       fee: "1200",
-                      imagePath: 'assets/tutor1.jpg',
+                      imagePath: 'assets/user1.png',
                     ),
                   ),
                 ],

@@ -83,6 +83,10 @@ flutter:
     - assets/tutor.png
     - assets/tutor1.jpg
     - assets/student.jpg
+    - assets/user1.png
+    - assets/user2.png
+    - assets/tutorcard2.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/Admin/coustom_drawer.dart';
+import 'package:project_1/pages/authentication/sign_in.dart';
 
 class AdminProfile extends StatefulWidget {
   const AdminProfile({super.key});
@@ -31,16 +32,13 @@ class _AdminProfileState extends State<AdminProfile> {
               // Profile Picture
               CircleAvatar(
                 radius: 50,
-                // adf admin image here
-                // Change to network image if needed
-                backgroundColor: Colors.grey[300],
+                backgroundImage: AssetImage('assets/user2.png'),
               ),
-
               SizedBox(height: 15),
 
               // Admin Name
               Text(
-                'Bruce Wayne',
+                'Admin',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
 
@@ -71,7 +69,10 @@ class _AdminProfileState extends State<AdminProfile> {
                   }),
                   SizedBox(width: 20),
                   _actionButton(Icons.logout, 'Logout', Colors.red, () {
-                    // Add Logout Functionality
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignIn()),
+                    );
                   }),
                 ],
               ),

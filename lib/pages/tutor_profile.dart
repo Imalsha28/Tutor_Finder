@@ -186,8 +186,7 @@ class TutorCard extends StatelessWidget {
             // Profile Image
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage(
-                  'assets/tutor1.jpg'), // Replace with actual image URL
+              backgroundImage: AssetImage('assets/user1.png'),
             ),
             const SizedBox(width: 16),
             // Tutor Details

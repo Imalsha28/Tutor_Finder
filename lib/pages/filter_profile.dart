@@ -79,7 +79,7 @@ class _FilterProfileState extends State<FilterProfile> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(40),
                                 child: Image.asset(
-                                  'assets/tutor1.jpg',
+                                  'assets/user1.png',
                                   width: 70,
                                   height: 70,
                                   fit: BoxFit.cover,
