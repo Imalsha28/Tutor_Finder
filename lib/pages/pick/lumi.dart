@@ -43,7 +43,7 @@ class Lumi extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Info Card
+            // Info Card with divider lines
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -55,13 +55,13 @@ class Lumi extends StatelessWidget {
               ),
               child: Column(
                 children: const [
-                  InfoRow(icon: Icons.school, text: "O Level"),
-                  SizedBox(height: 8),
+                  InfoRow(icon: Icons.school, text: "A Level"),
+                  Divider(),
                   InfoRow(icon: Icons.location_on, text: "Colombo"),
-                  SizedBox(height: 8),
-                  InfoRow(icon: Icons.wifi, text: "Online"),
-                  SizedBox(height: 8),
-                  InfoRow(icon: Icons.payments, text: "Rs. 1400 / Month"),
+                  Divider(),
+                  InfoRow(icon: Icons.wifi, text: "In Person"),
+                  Divider(),
+                  InfoRow(icon: Icons.payments, text: "Rs. 1200 / Month"),
                 ],
               ),
             ),
@@ -79,25 +79,42 @@ class Lumi extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
-                      .map((day) => Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: day == "Mo"
-                                  ? Colors.deepPurple
-                                  : Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              day,
-                              style: TextStyle(
-                                color:
-                                    day == "Mo" ? Colors.white : Colors.black,
+                      .map((day) => Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: day == "Tu"
+                                      ? Colors.deepPurple
+                                      : Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  day,
+                                  style: TextStyle(
+                                    color: day == "Tu"
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
                               ),
-                            ),
+                              const SizedBox(height: 4),
+                              if (day == "Tu")
+                                Container(
+                                  width: 6,
+                                  height: 6,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.deepPurple,
+                                  ),
+                                )
+                              else
+                                const SizedBox(height: 6),
+                            ],
                           ))
                       .toList(),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20), // More space before time chips
                 Wrap(
                   spacing: 12,
                   runSpacing: 12,
@@ -115,7 +132,7 @@ class Lumi extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Contact Buttons
+            // Contact Buttons with white text and icon
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -127,12 +144,12 @@ class Lumi extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Reviews Button
+            // Reviews Button with yellow star
             OutlinedButton.icon(
               onPressed: () {
                 // navigate to reviews
               },
-              icon: const Icon(Icons.star_border, color: Colors.deepPurple),
+              icon: const Icon(Icons.star_border, color: Colors.amber),
               label: const Text(
                 "Reviews",
                 style: TextStyle(color: Colors.deepPurple),
@@ -190,8 +207,8 @@ class Lumi extends StatelessWidget {
   Widget contactButton(IconData icon, String label) {
     return ElevatedButton.icon(
       onPressed: () {},
-      icon: Icon(icon),
-      label: Text(label),
+      icon: Icon(icon, color: Colors.white),
+      label: Text(label, style: const TextStyle(color: Colors.white)),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.green,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

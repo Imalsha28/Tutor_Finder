@@ -28,7 +28,7 @@ class MytutorProfile extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Profile image
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/user1.png'),
             ),
@@ -47,7 +47,7 @@ class MytutorProfile extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
               child: Text(
-                "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor in industry. I'm from Kottawa.",
+                "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor",
                 textAlign: TextAlign.center,
                 style: TextStyle(height: 1.4),
               ),
@@ -55,34 +55,61 @@ class MytutorProfile extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Info Rows
-            _infoRow("Subjects", "English"),
-            _infoRow("Grade Level", "O Level"),
-            _infoRow("Tuition Type", "Online"),
-            _infoRow("Tuition medium", "English"),
-            _infoRow("Location", "Kottawa"),
-
-            const SizedBox(height: 14),
-
-            // Experience & Fee
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _boxText("2 year Teaching Exp"),
-                const SizedBox(width: 10),
-                _boxText("Rs.2000 | Monthly"),
-              ],
+            // Info Box
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(color: Colors.black12, blurRadius: 6),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _infoRow("Subjects", "English"),
+                  const Divider(),
+                  _infoRow("Grade Level", "O Level"),
+                  const Divider(),
+                  _infoRow("Tuition Type", "Online"),
+                  const Divider(),
+                  _infoRow("Tuition Medium", "English"),
+                  const Divider(),
+                  _infoRow("Location", "Kottawa"),
+                ],
+              ),
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 18),
+
+            // Experience & Fee Box
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple.shade50,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _boxText("2 Year Teaching Exp"),
+                  _boxText("Rs. 2000 | Monthly"),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 28),
             const Divider(thickness: 1),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
 
             // Schedule
             const Align(
               alignment: Alignment.centerLeft,
-              child: Text("Schedule",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              child: Text(
+                "Schedule",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
             ),
             const SizedBox(height: 14),
 
@@ -107,11 +134,15 @@ class MytutorProfile extends StatelessWidget {
 
   Widget _infoRow(String title, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("$title: ", style: const TextStyle(fontWeight: FontWeight.w600)),
+          Icon(Icons.circle, size: 8, color: Colors.deepPurple),
+          const SizedBox(width: 10),
+          Text(
+            "$title: ",
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
           Expanded(
             child: Text(value, style: const TextStyle(color: Colors.black87)),
           ),
@@ -122,22 +153,17 @@ class MytutorProfile extends StatelessWidget {
 
   Widget _boxText(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          )
-        ],
+        color: Colors.deepPurple,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         text,
-        style: const TextStyle(fontWeight: FontWeight.w500),
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Colors.white,
+        ),
       ),
     );
   }
