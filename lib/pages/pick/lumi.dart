@@ -24,7 +24,7 @@ class Lumi extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Text(
-              "Lumi Wijesekara",
+              "Upul",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const Text(

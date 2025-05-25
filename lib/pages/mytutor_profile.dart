@@ -30,7 +30,7 @@ class MytutorProfile extends StatelessWidget {
             // Profile image
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/student.jpg'),
+              backgroundImage: AssetImage('assets/user1.png'),
             ),
             const SizedBox(height: 12),
 

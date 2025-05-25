@@ -47,7 +47,7 @@ class Sci extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => Lumi()));
                     },
                     child: _buildTutorCard(
-                      name: "Lumi Wijesekara",
+                      name: "Upul",
                       subject: "Science",
                       type: "Online",
                       level: "A Level",
@@ -61,7 +61,7 @@ class Sci extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => Alex()));
                     },
                     child: _buildTutorCard(
-                      name: "Alex Steffan",
+                      name: "Suba",
                       subject: "Science",
                       type: "In Person",
                       level: "O Level",

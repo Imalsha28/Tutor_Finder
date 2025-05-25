@@ -24,7 +24,7 @@ class Alex extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Text(
-              "Alex Steffan",
+              "Suba",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const Text(
