@@ -47,7 +47,7 @@ class MytutorProfile extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
               child: Text(
-                "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor",
+                "Hi I'm Imalsha, Good Qualified Tutor",
                 textAlign: TextAlign.center,
                 style: TextStyle(height: 1.4),
               ),
@@ -76,7 +76,7 @@ class MytutorProfile extends StatelessWidget {
                   const Divider(),
                   _infoRow("Tuition Medium", "English"),
                   const Divider(),
-                  _infoRow("Location", "Kottawa"),
+                  _infoRow("Location", "Colombo"),
                 ],
               ),
             ),
@@ -93,8 +93,8 @@ class MytutorProfile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _boxText("2 Year Teaching Exp"),
-                  _boxText("Rs. 2000 | Monthly"),
+                  _boxText("2 Year Experience"),
+                  _boxText("Rs. 1500 | Monthly"),
                 ],
               ),
             ),
@@ -117,7 +117,7 @@ class MytutorProfile extends StatelessWidget {
             _sectionLabel("Date"),
             const SizedBox(height: 10),
             _buildDateRow(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-                selectedDays: ["Su"]),
+                selectedDays: ["Mo"]),
 
             const SizedBox(height: 25),
 

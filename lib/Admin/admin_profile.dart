@@ -53,8 +53,8 @@ class _AdminProfileState extends State<AdminProfile> {
               SizedBox(height: 20),
 
               // Admin Details with rounded boxes
-              _buildProfileDetail('Email', 'admin@tutorhive.com', Icons.email),
-              _buildProfileDetail('Phone', '+94 77 123 4567', Icons.phone),
+              _buildProfileDetail('User name', 'admin', Icons.verified_user),
+
               _buildProfileDetail(
                   'Joined', '17 March 2025', Icons.calendar_today),
 
@@ -64,9 +64,6 @@ class _AdminProfileState extends State<AdminProfile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _actionButton(Icons.edit, 'Edit Profile', Colors.blue, () {
-                    // Add Edit Functionality
-                  }),
                   SizedBox(width: 20),
                   _actionButton(Icons.logout, 'Logout', Colors.red, () {
                     Navigator.pushReplacement(

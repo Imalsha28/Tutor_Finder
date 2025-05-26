@@ -7,8 +7,8 @@ class UpdateMytute extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController nameController =
         TextEditingController(text: 'Imalsha Wanigasooriya');
-    final TextEditingController aboutController = TextEditingController(
-        text: "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor");
+    final TextEditingController aboutController =
+        TextEditingController(text: "Hi I'm Imalsha, Good Qualified Tutor");
     final TextEditingController expController =
         TextEditingController(text: '2 year Experience');
     final TextEditingController feeController =
@@ -98,7 +98,7 @@ class UpdateMytute extends StatelessWidget {
             _sectionLabel("Date"),
             const SizedBox(height: 10),
             _buildDateRow(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-                selectedDays: ["Su"]),
+                selectedDays: ["Mo"]),
 
             const SizedBox(height: 25),
 
