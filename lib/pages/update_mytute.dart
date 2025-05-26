@@ -8,12 +8,11 @@ class UpdateMytute extends StatelessWidget {
     final TextEditingController nameController =
         TextEditingController(text: 'Imalsha Wanigasooriya');
     final TextEditingController aboutController = TextEditingController(
-        text:
-            "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor in industry.");
+        text: "Hi I'm Imalsha Wanigasooriya, Good Qualified Tutor");
     final TextEditingController expController =
-        TextEditingController(text: '2 year Teaching Exp');
+        TextEditingController(text: '2 year Experience');
     final TextEditingController feeController =
-        TextEditingController(text: 'Rs.2000 | Monthly');
+        TextEditingController(text: 'Rs.1500 | Monthly');
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -33,7 +32,7 @@ class UpdateMytute extends StatelessWidget {
             // Profile image
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/student.jpg'),
+              backgroundImage: AssetImage('assets/user1.png'),
             ),
             const SizedBox(height: 12),
 
@@ -59,13 +58,13 @@ class UpdateMytute extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Dropdowns
-            _buildDropdown('Subject', 'Art', ['Art', 'Math', 'Science']),
             _buildDropdown(
-                'Grade Level', 'O Level', ['Primary', 'O Level', 'A Level']),
+                'Subject', 'English', ['English', 'Math', 'Science']),
+            _buildDropdown('Grade Level', 'O Level', ['O Level', 'A Level']),
             _buildDropdown('Tuition Type', 'Online', ['Online', 'Physical']),
             _buildDropdown('Medium', 'English', ['English', 'Sinhala']),
-            _buildDropdown('Location', 'Kottawa',
-                ['Kottawa', 'Colombo', 'Galle', 'Kandy']),
+            _buildDropdown(
+                'Location', 'Colombo', ['Colombo', 'Galle', 'Kandy']),
 
             const SizedBox(height: 14),
 

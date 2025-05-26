@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlta.dart';
 import 'package:project_1/pages/Location.dart';
+import 'package:project_1/pages/find_tutor.dart';
 import 'package:project_1/pages/pick/sci.dart';
 import 'package:project_1/pages/tutor_profile.dart';
 import 'package:project_1/pages/tutor_register.dart';
@@ -57,6 +58,10 @@ class _FirstScreenState extends State<FirstScreen> {
                 children: [
                   // Search bar
                   TextField(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FindTutor()));
+                    },
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.search, color: Colors.grey),
                       hintText: "Search a Tutor",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlta.dart';
+import 'package:project_1/intl/si_english.dart';
 import 'package:project_1/intl/sin_science.dart';
 
 class Intlsi extends StatefulWidget {
@@ -198,7 +199,12 @@ class _IntlsiState extends State<Intlsi> {
                       CategoryCard(
                         label: "ඉංග්රීසි",
                         icon: Icons.school,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SiEnglish()));
+                        },
                       ),
                     ],
                   ),

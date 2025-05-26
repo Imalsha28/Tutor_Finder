@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SinScience extends StatelessWidget {
-  const SinScience({super.key});
+class TaScience extends StatelessWidget {
+  const TaScience({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ගුරුවරුන්ගේ පැතිකඩ"),
+        title: const Text("ஆசிரியர்களின் சுயவிவரம்"),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -18,10 +18,10 @@ class SinScience extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
-                name: "උපුල්",
-                subject: "විද්‍යාව",
-                type: "ඔන්ලයින්",
-                level: "A ලෙවල්",
+                name: "உபுல்",
+                subject: "அறிவியல்",
+                type: "ஆன்லைன்",
+                level: "ஒரு நிலை",
                 fee: "1400",
                 imagePath: 'assets/user1.png',
               ),
@@ -31,10 +31,10 @@ class SinScience extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
-                name: "සුභා",
-                subject: "විද්‍යාව",
-                type: "පුද්ගලිකව",
-                level: "O ලෙවල්",
+                name: "சுபா",
+                subject: "அறிவியல்",
+                type: "தனிப்பட்ட முறையில்",
+                level: "ஓ நிலை",
                 fee: "1200",
                 imagePath: 'assets/user1.png',
               ),

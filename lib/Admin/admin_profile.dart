@@ -52,7 +52,7 @@ class _AdminProfileState extends State<AdminProfile> {
 
               SizedBox(height: 20),
 
-              // Admin Details
+              // Admin Details with rounded boxes
               _buildProfileDetail('Email', 'admin@tutorhive.com', Icons.email),
               _buildProfileDetail('Phone', '+94 77 123 4567', Icons.phone),
               _buildProfileDetail(
@@ -83,21 +83,29 @@ class _AdminProfileState extends State<AdminProfile> {
     );
   }
 
-  // Profile Detail Row
+  // Profile Detail Row with Rounded Box
   Widget _buildProfileDetail(String title, String value, IconData icon) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.blue),
-          SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              '$title: $value',
-              style: TextStyle(fontSize: 16),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: const Color.fromARGB(255, 121, 121, 121)),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.blue),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                '$title: $value',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

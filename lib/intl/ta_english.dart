@@ -1,41 +1,27 @@
 import 'package:flutter/material.dart';
 
-class SinScience extends StatelessWidget {
-  const SinScience({super.key});
+class TaEnglish extends StatelessWidget {
+  const TaEnglish({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ගුරුවරුන්ගේ පැතිකඩ"),
+        title: const Text("ஆசிரியர்களின் சுயவிவரம்"),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            // First Card - Ms. Lumi
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
-                name: "උපුල්",
-                subject: "විද්‍යාව",
-                type: "ඔන්ලයින්",
-                level: "A ලෙවල්",
+                name: "கலானி தோடம்தென்ன",
+                subject: "ஆங்கிலம்",
+                type: "ஆன்லைன்",
+                level: "ஓ நிலை",
                 fee: "1400",
-                imagePath: 'assets/user1.png',
-              ),
-            ),
-
-            // Second Card - Mr. Alex
-            GestureDetector(
-              onTap: () {},
-              child: _buildTutorCard(
-                name: "සුභා",
-                subject: "විද්‍යාව",
-                type: "පුද්ගලිකව",
-                level: "O ලෙවල්",
-                fee: "1200",
                 imagePath: 'assets/user1.png',
               ),
             ),
@@ -80,14 +66,12 @@ class SinScience extends StatelessWidget {
                   Text(subject),
                   Text(type),
                   Text(level),
-                  Text("Monthly Fee: $fee"),
+                  Text("மாதாந்திர: $fee"),
                 ],
               ),
             ),
             IconButton(
-              onPressed: () {
-                // Add favorite logic
-              },
+              onPressed: () {},
               icon: const Icon(Icons.favorite_border, color: Colors.purple),
             ),
           ],

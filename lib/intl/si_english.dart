@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SinScience extends StatelessWidget {
-  const SinScience({super.key});
+class SiEnglish extends StatelessWidget {
+  const SiEnglish({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,28 +14,14 @@ class SinScience extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            // First Card - Ms. Lumi
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
-                name: "උපුල්",
-                subject: "විද්‍යාව",
+                name: "කලනි දොඩම්තැන්න",
+                subject: "ඉංග්රීසි",
                 type: "ඔන්ලයින්",
-                level: "A ලෙවල්",
-                fee: "1400",
-                imagePath: 'assets/user1.png',
-              ),
-            ),
-
-            // Second Card - Mr. Alex
-            GestureDetector(
-              onTap: () {},
-              child: _buildTutorCard(
-                name: "සුභා",
-                subject: "විද්‍යාව",
-                type: "පුද්ගලිකව",
                 level: "O ලෙවල්",
-                fee: "1200",
+                fee: "1400",
                 imagePath: 'assets/user1.png',
               ),
             ),
@@ -80,7 +66,7 @@ class SinScience extends StatelessWidget {
                   Text(subject),
                   Text(type),
                   Text(level),
-                  Text("Monthly Fee: $fee"),
+                  Text("මාසිකව: $fee"),
                 ],
               ),
             ),

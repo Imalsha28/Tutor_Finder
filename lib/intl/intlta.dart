@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlsi.dart';
+import 'package:project_1/intl/ta_english.dart';
+import 'package:project_1/intl/ta_science.dart';
 
 class Intlta extends StatefulWidget {
   const Intlta({super.key});
@@ -186,13 +188,23 @@ class _IntltaState extends State<Intlta> {
                       CategoryCard(
                         label: "அறிவியல்",
                         icon: Icons.school,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TaScience()));
+                        },
                       ),
                       // A Level Category Card
                       CategoryCard(
                         label: "ஆங்கிலம்",
                         icon: Icons.school,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TaEnglish()));
+                        },
                       ),
                     ],
                   ),
