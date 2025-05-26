@@ -33,7 +33,6 @@ class _IntlsiState extends State<Intlsi> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Purple gradient background
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -108,9 +107,7 @@ class _IntlsiState extends State<Intlsi> {
                                 selectedLocation = newValue!;
                               });
                               if (newValue == "Set your Location") {
-                                // Navigate to the Search Location Screen
                               } else {
-                                // Handle other selections (e.g., update selectedLocation)
                                 print("Selected location: $newValue");
                               }
                             },

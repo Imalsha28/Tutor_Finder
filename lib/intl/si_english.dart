@@ -71,9 +71,7 @@ class SiEnglish extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                // Add favorite logic
-              },
+              onPressed: () {},
               icon: const Icon(Icons.favorite_border, color: Colors.purple),
             ),
           ],

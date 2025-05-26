@@ -38,13 +38,11 @@ class _NavigationWrapperState extends State<NavigationWrapper> {
             pageIndex = index;
           });
 
-          // Optional: Navigate to different screens based on index
           if (index == 0) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => NavigationWrapper(
-                    child: Intlsi()), // Replace with correct page
+                builder: (context) => NavigationWrapper(child: Intlsi()),
               ),
             );
           } else if (index == 1) {

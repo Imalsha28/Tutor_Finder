@@ -14,7 +14,6 @@ class TaScience extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            // First Card - Ms. Lumi
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
@@ -26,8 +25,6 @@ class TaScience extends StatelessWidget {
                 imagePath: 'assets/user1.png',
               ),
             ),
-
-            // Second Card - Mr. Alex
             GestureDetector(
               onTap: () {},
               child: _buildTutorCard(
@@ -85,9 +82,7 @@ class TaScience extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                // Add favorite logic
-              },
+              onPressed: () {},
               icon: const Icon(Icons.favorite_border, color: Colors.purple),
             ),
           ],
