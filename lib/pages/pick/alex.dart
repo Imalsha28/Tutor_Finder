@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/pages/reviews.dart';
 
 class Alex extends StatelessWidget {
   const Alex({super.key});
@@ -114,7 +115,7 @@ class Alex extends StatelessWidget {
                           ))
                       .toList(),
                 ),
-                const SizedBox(height: 20), // More space before time chips
+                const SizedBox(height: 20),
                 Wrap(
                   spacing: 12,
                   runSpacing: 12,
@@ -132,7 +133,7 @@ class Alex extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Contact Buttons with white text and icon
+            // Contact Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -144,10 +145,12 @@ class Alex extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Reviews Button with yellow star
             OutlinedButton.icon(
               onPressed: () {
-                // navigate to reviews
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReviewsPage()),
+                );
               },
               icon: const Icon(Icons.star_border, color: Colors.amber),
               label: const Text(

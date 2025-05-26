@@ -235,18 +235,18 @@ class _TutorRegisterState extends State<TutorRegister> {
                         final String? existingTutorsString =
                             prefs.getString('tutors');
 
-// Step 1: Decode existing string to List
+//  Decode existing string to List
                         List<dynamic> tutorList = existingTutorsString != null
                             ? jsonDecode(existingTutorsString)
                             : [];
 
-// Step 2: Add new tutor as JSON
+//  Add new tutor as JSON
                         tutorList.add(tutor.toJson());
 
-// Step 3: Encode updated list to string
+//  Encode updated list to string
                         final updatedTutorsString = jsonEncode(tutorList);
 
-// Step 4: Save back to SharedPreferences
+//  Save back to SharedPreferences
                         await prefs.setString('tutors', updatedTutorsString);
 // save to firebase
                         try {
