@@ -24,6 +24,8 @@ class TutorProfile extends StatefulWidget {
 }
 
 class _TutorProfileState extends State<TutorProfile> {
+  String? selectedLocation;
+  double? maxFee;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,9 +62,95 @@ class _TutorProfileState extends State<TutorProfile> {
                           ),
                         );
                       }),
-                  FilterButton(label: "Location", onPressed: () {}),
-                  FilterButton(label: "Fees", onPressed: () {}),
-                  FilterButton(label: "Clear", onPressed: () {}),
+                  FilterButton(
+                      label: "Location",
+                      onPressed: () async {
+                        final result = await showDialog<String>(
+                          context: context,
+                          builder: (context) => SimpleDialog(
+                            title: const Text("Select Location"),
+                            children: [
+                              SimpleDialogOption(
+                                onPressed: () =>
+                                    Navigator.pop(context, "Colombo"),
+                                child: const Text("Colombo"),
+                              ),
+                              SimpleDialogOption(
+                                onPressed: () =>
+                                    Navigator.pop(context, "Kandy"),
+                                child: const Text("Kandy"),
+                              ),
+                              SimpleDialogOption(
+                                onPressed: () =>
+                                    Navigator.pop(context, "Galle"),
+                                child: const Text("Galle"),
+                              ),
+                            ],
+                          ),
+                        );
+
+                        if (result != null) {
+                          setState(() {
+                            selectedLocation = result;
+                          });
+                        }
+                      }),
+                  FilterButton(
+                      label: "Fees",
+                      onPressed: () async {
+                        final result = await showDialog<double>(
+                          context: context,
+                          builder: (context) {
+                            double tempFee = maxFee ?? 5000;
+                            return AlertDialog(
+                              title: const Text("Set Max Fee"),
+                              content: StatefulBuilder(
+                                builder: (context, setDialogState) {
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text("Rs. ${tempFee.toInt()}"),
+                                      Slider(
+                                        value: tempFee,
+                                        min: 0,
+                                        max: 10000,
+                                        divisions: 100,
+                                        label: tempFee.toInt().toString(),
+                                        onChanged: (value) {
+                                          setDialogState(() {
+                                            tempFee = value;
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, tempFee),
+                                  child: const Text("Apply"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        if (result != null) {
+                          setState(() {
+                            maxFee = result;
+                          });
+                        }
+                      }),
+                  FilterButton(
+                      label: "Clear",
+                      onPressed: () {
+                        setState(() {
+                          selectedLocation = null;
+                          maxFee = null;
+                        });
+                      }),
                 ],
               ),
             ),

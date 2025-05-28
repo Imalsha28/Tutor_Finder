@@ -8,7 +8,7 @@ class UpdateMytute extends StatelessWidget {
     final TextEditingController nameController =
         TextEditingController(text: 'Imalsha Wanigasooriya');
     final TextEditingController aboutController =
-        TextEditingController(text: "Hi I'm Imalsha, Good Qualified Tutor");
+        TextEditingController(text: "Hi I'm Imalsha, good qualified tutor");
     final TextEditingController expController =
         TextEditingController(text: '2 year Experience');
     final TextEditingController feeController =

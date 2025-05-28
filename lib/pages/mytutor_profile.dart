@@ -47,7 +47,7 @@ class MytutorProfile extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
               child: Text(
-                "Hi I'm Imalsha, Good Qualified Tutor",
+                "Hi I'm Imalsha, good qualified tutor",
                 textAlign: TextAlign.center,
                 style: TextStyle(height: 1.4),
               ),

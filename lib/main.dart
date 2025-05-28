@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.deepPurple,
             ),
-            locale: languageProvider.locale, // <-- listen to selected language
+            locale: languageProvider.locale,
             supportedLocales: const [
               Locale('en', ''), // English
               Locale('si', ''), // Sinhala
