@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/intl/bottom.dart';
 import 'package:project_1/intl/intlta.dart';
-import 'package:project_1/intl/si_english.dart';
-import 'package:project_1/intl/sin_science.dart';
 
 class Intlsi extends StatefulWidget {
   const Intlsi({super.key});
@@ -185,23 +183,13 @@ class _IntlsiState extends State<Intlsi> {
                       CategoryCard(
                         label: "විද්යාව",
                         icon: Icons.school,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SinScience()));
-                        },
+                        onTap: () {},
                       ),
                       // Subject Category Card
                       CategoryCard(
                         label: "ඉංග්රීසි",
                         icon: Icons.school,
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SiEnglish()));
-                        },
+                        onTap: () {},
                       ),
                     ],
                   ),

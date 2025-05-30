@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_1/pages/authentication/sign_in.dart';
 
-import 'package:project_1/pages/befor_mytute.dart';
 import 'package:project_1/pages/mytutor_profile.dart';
 import 'package:project_1/pages/update_mytute.dart';
 
@@ -94,17 +93,18 @@ class _UserProfileState extends State<UserProfile> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => MytutorProfile()));
                 },
-                onArrowTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => BeforMytute()));
-                }),
+                onArrowTap: () {}),
             SizedBox(height: 10),
             _buildDualNavigationTile(
               icon: Icons.edit,
               text: "Update Your Profile",
               onTileTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => UpdateMytute()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => UpdateMytute(
+                              tutorData: {},
+                            )));
               },
               onArrowTap: () {},
             ),

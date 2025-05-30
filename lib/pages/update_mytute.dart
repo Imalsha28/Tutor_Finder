@@ -1,211 +1,122 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UpdateMytute extends StatelessWidget {
-  const UpdateMytute({super.key});
+class UpdateMytute extends StatefulWidget {
+  final Map<String, dynamic> tutorData;
+
+  const UpdateMytute({super.key, required this.tutorData});
+
+  @override
+  State<UpdateMytute> createState() => _EditTutorProfileState();
+}
+
+class _EditTutorProfileState extends State<UpdateMytute> {
+  final _formKey = GlobalKey<FormState>();
+  late TextEditingController nameController;
+  late TextEditingController subjectController;
+  late TextEditingController locationController;
+
+  bool isSaving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.tutorData['name']);
+    subjectController =
+        TextEditingController(text: widget.tutorData['subject']);
+    locationController =
+        TextEditingController(text: widget.tutorData['location']);
+  }
+
+  Future<void> saveChanges() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      isSaving = true;
+    });
+
+    try {
+      // Get the document ID of the tutor profile
+      final query = await FirebaseFirestore.instance
+          .collection('tutors')
+          .where('name', isEqualTo: widget.tutorData['name'])
+          .limit(1)
+          .get();
+
+      if (query.docs.isNotEmpty) {
+        final docId = query.docs.first.id;
+
+        await FirebaseFirestore.instance
+            .collection('tutors')
+            .doc(docId)
+            .update({
+          'name': nameController.text.trim(),
+          'subject': subjectController.text.trim(),
+          'location': locationController.text.trim(),
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully')),
+        );
+
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tutor profile not found')),
+        );
+      }
+    } catch (e) {
+      print("Update error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to update profile')),
+      );
+    }
+
+    setState(() {
+      isSaving = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController =
-        TextEditingController(text: 'Imalsha Wanigasooriya');
-    final TextEditingController aboutController =
-        TextEditingController(text: "Hi I'm Imalsha, good qualified tutor");
-    final TextEditingController expController =
-        TextEditingController(text: '2 year Experience');
-    final TextEditingController feeController =
-        TextEditingController(text: 'Rs.1500 | Monthly');
-
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        elevation: 0,
-        backgroundColor: Colors.grey[100],
-        title: const Text(
-          'Edit Tutor Profile',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-        child: Column(
-          children: [
-            // Profile image
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('assets/user1.png'),
-            ),
-            const SizedBox(height: 12),
-
-            // Name field
-            TextFormField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                labelText: 'Full Name',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 12),
-
-            // About field
-            TextFormField(
-              controller: aboutController,
-              maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: 'About',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Dropdowns
-            _buildDropdown(
-                'Subject', 'English', ['English', 'Math', 'Science']),
-            _buildDropdown('Grade Level', 'O Level', ['O Level', 'A Level']),
-            _buildDropdown('Tuition Type', 'Online', ['Online', 'Physical']),
-            _buildDropdown('Medium', 'English', ['English', 'Sinhala']),
-            _buildDropdown(
-                'Location', 'Colombo', ['Colombo', 'Galle', 'Kandy']),
-
-            const SizedBox(height: 14),
-
-            // Experience & Fee
-            TextFormField(
-              controller: expController,
-              decoration: const InputDecoration(
-                labelText: 'Experience',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: feeController,
-              decoration: const InputDecoration(
-                labelText: 'Fee',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Divider(),
-
-            // Schedule
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Schedule",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            ),
-            const SizedBox(height: 14),
-
-            _sectionLabel("Date"),
-            const SizedBox(height: 10),
-            _buildDateRow(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-                selectedDays: ["Mo"]),
-
-            const SizedBox(height: 25),
-
-            _sectionLabel("Time"),
-            const SizedBox(height: 10),
-            _buildTimeRow(["Morning", "Evening", "Night"],
-                selectedTimes: ["Morning"]),
-
-            const SizedBox(height: 30),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+      appBar: AppBar(title: const Text("Edit Tutor Profile")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: isSaving
+            ? const Center(child: CircularProgressIndicator())
+            : Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    TextFormField(
+                      controller: nameController,
+                      decoration: const InputDecoration(labelText: "Name"),
+                      validator: (value) =>
+                          value!.isEmpty ? "Name can't be empty" : null,
+                    ),
+                    TextFormField(
+                      controller: subjectController,
+                      decoration: const InputDecoration(labelText: "Subject"),
+                      validator: (value) =>
+                          value!.isEmpty ? "Subject can't be empty" : null,
+                    ),
+                    TextFormField(
+                      controller: locationController,
+                      decoration: const InputDecoration(labelText: "Location"),
+                      validator: (value) =>
+                          value!.isEmpty ? "Location can't be empty" : null,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: saveChanges,
+                      child: const Text("Save Changes"),
+                    )
+                  ],
                 ),
-                minimumSize: const Size.fromHeight(50),
               ),
-              onPressed: () {},
-              child: const Text("Save Profile",
-                  style: TextStyle(fontSize: 16, color: Colors.white)),
-            ),
-          ],
-        ),
       ),
-    );
-  }
-
-  Widget _buildDropdown(String label, String initial, List<String> items) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: DropdownButtonFormField<String>(
-        value: initial,
-        decoration: InputDecoration(
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-        onChanged: (value) {},
-        items: items.map((item) {
-          return DropdownMenuItem<String>(
-            value: item,
-            child: Text(item),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget _sectionLabel(String text) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        text,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-      ),
-    );
-  }
-
-  Widget _buildDateRow(List<String> days, {List<String>? selectedDays}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: days.map((day) {
-        final isSelected = selectedDays?.contains(day) ?? false;
-        return CircleAvatar(
-          radius: 20,
-          backgroundColor: isSelected ? Colors.deepPurple : Colors.white,
-          child: Text(
-            day,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildTimeRow(List<String> times, {List<String>? selectedTimes}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: times.map((time) {
-        final isSelected = selectedTimes?.contains(time) ?? false;
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-          decoration: BoxDecoration(
-            color: isSelected ? Colors.deepPurple : Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.grey.shade300),
-            boxShadow: [
-              if (isSelected)
-                const BoxShadow(
-                  color: Colors.deepPurpleAccent,
-                  blurRadius: 6,
-                  offset: Offset(0, 2),
-                ),
-            ],
-          ),
-          child: Text(
-            time,
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black87,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }
