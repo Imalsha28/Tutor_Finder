@@ -21,7 +21,7 @@ class _MytutorProfileState extends State<MytutorProfile> {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       try {
-        // Step 1: Get user name from 'users' collection using UID
+        // Get user name from 'users' collection using UID
         final userDoc = await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
@@ -30,7 +30,7 @@ class _MytutorProfileState extends State<MytutorProfile> {
         if (userDoc.exists && userDoc.data()!.containsKey('name')) {
           String userName = userDoc['name'];
 
-          // Step 2: Match tutor collection using name (temporary approach)
+          // Match tutor collection using name
           final query = await FirebaseFirestore.instance
               .collection('tutors')
               .where('name', isEqualTo: userName)

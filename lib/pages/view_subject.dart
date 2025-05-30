@@ -41,9 +41,7 @@ class ViewSubject extends StatelessWidget {
                 var subject = subjects[index];
 
                 return GestureDetector(
-                  onTap: () {
-                    // You can add navigation to subject-specific tutors here
-                  },
+                  onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.deepPurple.shade200,

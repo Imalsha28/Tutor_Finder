@@ -26,29 +26,26 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Display the selected page
       body: pages[pageIndex],
 
       // Bottom navigation bar
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.white, // Background color for the main screen
-        color: Colors.deepPurple, // Color of the navigation bar
-        buttonBackgroundColor:
-            Colors.deepPurpleAccent, // Highlighted icon background
-        height: 60, // Height of the navigation bar
-        index: pageIndex, // Current selected index
-        animationDuration:
-            const Duration(milliseconds: 300), // Smooth animation
-        animationCurve: Curves.easeInOut, // Animation curve
+        backgroundColor: Colors.white,
+        color: Colors.deepPurple,
+        buttonBackgroundColor: Colors.deepPurpleAccent,
+        height: 60,
+        index: pageIndex,
+        animationDuration: const Duration(milliseconds: 300),
+        animationCurve: Curves.easeInOut,
         onTap: (index) {
           setState(() {
-            pageIndex = index; // Update the current page
+            pageIndex = index;
           });
         },
         items: const [
-          Icon(Icons.home, size: 30, color: Colors.white), // Home icon
-          Icon(Icons.search, size: 30, color: Colors.white), // Find Tutor icon
-          Icon(Icons.person, size: 30, color: Colors.white), // Profile icon
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.search, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
         ],
       ),
     );
