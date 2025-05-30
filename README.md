@@ -24,6 +24,12 @@ A Flutter and Firebase-based mobile application for students to find and connect
 
 ![Find Tutor screen](./screenshots/Find%20Tutor%20screen.png)
 
+![User Profile](./screenshots/User%20Profile.png)
+
+![Tutor Profiles](./screenshots/Tutor%20Profiles.png)
+
+![Firebase Firestore](./screenshots/Firebase%20Firestore.png)
+
 ## How to Run the project
 
 1. **Fork or Clone the Repository**
