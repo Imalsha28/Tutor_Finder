@@ -35,7 +35,7 @@ A Flutter and Firebase-based mobile application for students to find and connect
 1. **Fork or Clone the Repository**
 ```bash
 git clone https://github.com/Imalsha28/Tutor_Finder.git
-cd tutor-finder-app
+cd Tutor_Finder
 ```
 2. **Install Dependencies**
 ```bash
